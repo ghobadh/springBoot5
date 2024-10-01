@@ -1,13 +1,6 @@
 package ca.gforcesoftware.springboot5.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
-
+import jakarta.persistence.*;
 
 
 import java.util.HashSet;
@@ -19,6 +12,8 @@ import java.util.Set;
 public class Book {
     private String title;
     private String isbn;
+    @ManyToOne
+    private Publisher publisher;
 
     @ManyToMany
     @JoinTable(name = "author_book",
@@ -30,7 +25,13 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public Publisher getPublisher() {
+        return publisher;
+    }
 
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
 
     public Book() {
     }
